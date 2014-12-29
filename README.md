@@ -1,8 +1,8 @@
-File & JDBC Bank DEMO
+CXF & CXFRS Claim DEMO
 ======================================================
-This demo demonstrates the use of File and JDBC connector in Camel, also added the use if Spilt pattern and Exception handling method. 
-The scenario of the demo is to mimic the transaction process between bank accounts, where it takes in XML file from different branch in a directory, each contains cash deposit, cash withdraw and transfer information of bank accounts, depending on the type of transaction, spilt up each transaction retrieve balance from a database, does the transaction and calculate the transaction fee and then place the balance back to the database storage. 
-
+This demoCreate web services that takes in customer's insurance claim application, also provide another cancel function in case they have changed their mind. 
+Using Camel CXF and CXFRS component to build the web service. And deploy the bundle onto JBoss Fuse Fabric. 
+In this demo, it uses 2 SOAP web service and 2 Restful Web Service, and the restCancel operation is actually reusing the cancel SOAP web service by using the CXF producer component.
 
 
 Setup and configuration
@@ -30,17 +30,17 @@ It will setup JBoss Fuse, install fabric, build and deploy the profile.
 To run the demo, in browser enter http://localhost:8181 and login with ID/PWD of admin/admin
 
 Under Runtime, you will see list of containers, and click on the small icon on the righthand-side of the testcon container
-![Fabric list](https://raw.githubusercontent.com/weimeilin79/filenjdbc/master/doc/pic/01-fabric-container-list.png?raw=true)
-Inside the Container, under Camel tab, you will see the list of routes we have.
-![Container Route List](https://raw.githubusercontent.com/weimeilin79/filenjdbc/master/doc/pic/02-container-route-list.png?raw=true)
-Click on Endpoint on the lefthand-side, choose the file endpoint, and send the xml.
-![Containter Endpoint Send](https://raw.githubusercontent.com/weimeilin79/filenjdbc/master/doc/pic/03-container-send.png?raw=true)
-You will see the transfer result in the log. 
-![Container Log](https://raw.githubusercontent.com/weimeilin79/filenjdbc/master/doc/pic/04-container-log.png?raw=true)
- 
+![Fabric list](https://raw.githubusercontent.com/weimeilin79/claim-cxf-cxfrs/master/doc/pic/01-fabric-container-list.png?raw=true)
+You can also checkout the registry
+![Fabric list](https://raw.githubusercontent.com/weimeilin79/claim-cxf-cxfrs/master/doc/pic/02-registry.png?raw=true)
+
+And either use browser to run it 
+![Fabric list](https://raw.githubusercontent.com/weimeilin79/claim-cxf-cxfrs/master/doc/pic/03-browser.png?raw=true)
+Or you can use SOAP UI to play with the SOAP Web Services.
+![Fabric list](https://raw.githubusercontent.com/weimeilin79/claim-cxf-cxfrs/master/doc/pic/04-soapui.png?raw=true)
 
 
 The demo video are located here too:
 
-1.	https://vimeo.com/113289566
-2.	https://vimeo.com/114960456 
+https://vimeo.com/115418661
+https://vimeo.com/115560431
