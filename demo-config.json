@@ -1,0 +1,26 @@
+{
+  "name":"CXF & CXFRS Claim DEMO",
+  "summary":"Using Camel CXF and CXFRS component to build the web service",
+  "author":"Christina Lin",
+  "level":"Beginner",
+  "published":true,
+  "prerequisites":"Java VM 1.6 or 1.7, Maven",
+  "targetProduct":"JBoss Fuse",
+  "productVersion":"JBoss Fuse 6.1",
+  "technologies": ["Camel","Fuse", "Karaf","Fabric8"],
+  "links": [ 
+    { 
+      "name":"Video",
+      "url":"https://vimeo.com/115560431"
+    },
+    {
+      "name":"Blog",
+      "url":"http://wei-meilin.blogspot.tw/2014/12/jboss-fuse-implementing-webservice-with.html"
+    }
+    ,
+    {
+      "name":"Code",
+      "url":"https://github.com/jbossdemocentral/jboss-fuse-component-cxf-cxfrs"
+    }
+  ]
+}
