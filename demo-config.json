@@ -2,6 +2,7 @@
   "name":"CXF & CXFRS Claim DEMO",
   "summary":"Using Camel CXF and CXFRS component to build the web service",
   "author":"Christina Lin",
+  "category":"fuse",
   "level":"Beginner",
   "published":true,
   "prerequisites":"Java VM 1.6 or 1.7, Maven",
