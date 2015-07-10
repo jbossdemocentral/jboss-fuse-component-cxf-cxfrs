@@ -29,7 +29,7 @@ It will setup JBoss Fuse, install fabric, build and deploy the profile.
 
 To run the demo, in browser enter http://localhost:8181 and login with ID/PWD of admin/admin
 
-Under Runtime, you will see list of containers, and click on the small icon on the righthand-side of the testcon container
+Under Runtime, you will see list of containers, and click on the small icon on the righthand-side of the cxfrscon container
 ![Fabric list](https://raw.githubusercontent.com/weimeilin79/claim-cxf-cxfrs/master/doc/pic/01-fabric-container-list.png?raw=true)
 You can also checkout the registry
 ![Fabric list](https://raw.githubusercontent.com/jbossdemocentral/claim-cxf-cxfrs/master/doc/pic/02-registry.png?raw=true)
