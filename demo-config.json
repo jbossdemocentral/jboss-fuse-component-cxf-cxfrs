@@ -5,9 +5,9 @@
   "category":"fuse",
   "level":"Beginner",
   "published":true,
-  "prerequisites":"Java VM 1.6 or 1.7, Maven",
+  "prerequisites":"Java VM 1.7, Maven",
   "targetProduct":"JBoss Fuse",
-  "productVersion":"JBoss Fuse 6.1",
+  "productVersion":"JBoss Fuse 6.2",
   "technologies": ["Camel","Fuse", "Karaf","Fabric8"],
   "links": [ 
     { 

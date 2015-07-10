@@ -1,10 +1,10 @@
 #!/bin/sh 
 DEMO="JBoss Fuse Camel CXF and CXFRS Connector"
-VERSION=6.1.0
+VERSION=6.2.0
 AUTHORS="Christina Lin"
-PROJECT="git@github.com/weimeilin79/claim-cxf-cxfrs.git"
-FUSE=jboss-fuse-6.1.0.redhat-379
-FUSE_BIN=jboss-fuse-full-6.1.0.redhat-379.zip
+PROJECT="jbossdemocentral/claim-cxf-cxfrs.git"
+FUSE=jboss-fuse-6.2.0.redhat-133
+FUSE_BIN=jboss-fuse-full-6.2.0.redhat-133.zip
 DEMO_HOME=./target
 FUSE_HOME=$DEMO_HOME/$FUSE
 FUSE_PROJECT=./project/claimdemo
@@ -35,9 +35,9 @@ echo "##                #      #####  #####  #####                   ##"
 echo "##                                                             ##"   
 echo "##                                                             ##"   
 echo "##  brought to you by,                                         ##"   
-echo "##                    ${AUTHORS}                              ##"
+echo "##                    ${AUTHORS}                            ##"
 echo "##                                                             ##"   
-echo "##  ${PROJECT}                 ##"
+echo "##  ${PROJECT}                       ##"
 echo "##                                                             ##"   
 echo "#################################################################"
 echo
@@ -89,45 +89,63 @@ else
 fi
 
 
-
 echo "  - enabling demo accounts logins in users.properties file..."
 echo
 cp support/users.properties $FUSE_SERVER_CONF
 
 
+
 echo "  - making sure 'FUSE' for server is executable..."
 echo
-chmod u+x $FUSE_HOME/bin/start
+chmod u+x $FUSE_SERVER_BIN/start
+chmod u+x $FUSE_SERVER_BIN/client
 
-cd target/$FUSE
 
 echo "  - Start up Fuse in the background"
 echo
-sh bin/start
+sh $FUSE_SERVER_BIN/start
 
-sleep 15
 
 echo "  - Create Fabric in Fuse"
 echo
-sh bin/client -r 3 -d 20 -u admin -p admin 'fabric:create --wait-for-provisioning'
+sh $FUSE_SERVER_BIN/client -r 3 -d 10 -u admin -p admin 'fabric:create'
+     
+sleep 15
 
-pwd
+#===Test if the fabric is ready=====================================
+echo Testing fabric,retry when not ready
+while true; do
+    if [ $(sh $FUSE_SERVER_BIN/client 'fabric:status'| grep "100%" | wc -l ) -ge 3 ]; then
+        break
+    fi
+    sleep 2
+done
+#===================================================================
 
 echo "Go to Project directory"
 echo      
-cd ../../$FUSE_PROJECT 
+cd $FUSE_PROJECT 
 
-echo "Start compile and deploy failover camel example project to fuse"
+echo "Start compile and deploy CXF and CXFRS camel example project to fuse"
 echo         
-mvn io.fabric8:fabric8-maven-plugin:1.2.0.Beta4:deploy
+mvn fabric8:deploy
 
-cd ../../target/$FUSE
 
-sleep 15 
+cd ../..
+
+#===Test if the fabric is ready=====================================
+echo Testing profiles,retry when not ready
+while true; do
+    if [ $(sh $FUSE_SERVER_BIN/client 'profile-list'| grep "demo-claim"| wc -l ) -ge 1 ]; then
+        break
+    fi
+    sleep 2
+done
+#===================================================================
 
 echo "Add profile to container"
 echo         
-sh bin/client -r 2 -d 40 'container-create-child --profile demo-claim --profile jboss-fuse-full root testcon'
+sh $FUSE_SERVER_BIN/client -r 2 -d 40 'container-create-child --profile demo-claim root cxfrscon'
 
 echo "To stop the backgroud Fuse process, please go to bin and execute stop"
 echo
